@@ -1,0 +1,148 @@
+<div class="container">
+    <div class="row">
+        <div class="main">
+            <h3>Edit User</h3>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+                        <div class="error-div">
+                            <%= devise_error_messages! %>
+                        </div>
+                        <div class="tab-pane1" id="tab1">
+                            <div class="form-group">
+                                <%= f.label :name %>
+                                <%= f.text_field :name, autocomplete: true, placeholder: " Enter your name", class: "form-control" %>
+                            </div>
+
+                            <div class="form-group">
+                                <%= f.label :email %>
+                                <%= f.email_field :email, autofocus: true, placeholder: " Enter your email", class: "form-control" %>
+                            </div>
+
+                            <div class="form-group">
+                                <%= f.label :password %>
+                                <% if @minimum_password_length %>
+                                    <em>(<%= @minimum_password_length %> characters minimum)</em>
+                                <% end %>
+                                <%= f.password_field :password, autocomplete: "off", placeholder: " Enter your password", class: "form-control" %>
+                            </div>
+
+                            <div class="form-group">
+                                <%= f.label :password_confirmation %>
+                                <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: " Re-enter password", class: "form-control" %>
+                            </div>
+
+                            <div class="form-group">
+                                <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+                                <%= f.password_field :current_password, autocomplete: "off", placeholder: " Enter your current password", class: "form-control" %>
+                            </div>
+
+                            <div class="form-group">
+                                <%= f.label :address %>
+                                <%= f.text_area :address, autocomplete: true, placeholder: " Enter your address", class: "form-control" %>
+                            </div>
+
+                            <div class="form-group">
+                                <%= f.label :mobile %>
+                                <%= f.text_field :mobile, autocomplete: true, placeholder: " Enter your mobile no", class: "form-control" %>
+                            </div>
+
+                            <div class="form-group">
+                                <%= f.label :user_type %>
+                                <%= f.radio_button :user_type, true ,{ :checked => true } %>&nbsp;&nbsp;
+                                <%= label_tag(:user_type, "Merchant") %>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <%= f.radio_button :user_type, "User" %>&nbsp;&nbsp;
+                                <%= label_tag(:user_type, "User") %>
+                            </div>
+
+                            <div class="com_submit">
+                                <a class="btn btn-primary btnNext compI_next" >Next</a>
+                            </div>
+                        </div>
+                        <div class="tab-pane2" id="tab2">
+                            <%= f.fields_for :accounts do |account_form| %>
+                                <div class="form-group">
+                                    <%= account_form.label :bank_name %>
+                                    <%= account_form.text_field :bank_name, placeholder: " Enter your bank name", class: "form-control"  %>
+                                </div>
+
+                                <div class="form-group">
+                                    <%= account_form.label :bank_address %>
+                                    <%= account_form.text_field :bank_address, placeholder: " Enter your bank address", class: "form-control"  %>
+                                </div>
+
+                                <div class="form-group">
+                                    <%= account_form.label :account_no %>
+                                    <%= account_form.text_field :account_no, placeholder: " Enter your account no", class: "form-control"  %>
+                                </div>
+
+                                <div class="form-group">
+                                    <%= account_form.label :IFSC, "IFSC" %>
+                                    <%= account_form.text_field :IFSC, placeholder: " Enter your IFSC Code", class: "form-control"  %>
+                                </div>
+
+                                <div class="form-group">
+                                    <%= account_form.label :PAN, "PAN" %>
+                                    <%= account_form.text_field :PAN, placeholder: " Enter your PAN No", class: "form-control"  %>
+                                </div>
+
+                                <div class="form-group">
+                                    <%= account_form.label :GST, "GST" %>
+                                    <%= account_form.text_field :GST, placeholder: " Enter your GST No", class: "form-control"  %>
+                                </div>
+                            <% end %>
+                            <div class="signup-actions">
+                                <%= f.submit "Update", class: "btn btn-primary form-submit" %>
+                                <a class="btn btn-primary btnPrevious" >Back</a>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+            <h3>Cancel my account</h3>
+
+            <p class="unhappy">Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-primary" %></p>
+
+            <%= link_to "Back", :back, class: "btn btn-primary" %>
+      </div>
+    </div>
+</div>
+
+<%#= render "devise/shared/links" %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.btnNext').click(function(){
+      $('.tab-pane1').css('display', 'none');
+      $('.tab-pane2').css('display', 'block');
+    });
+    $('.btnPrevious').click(function(){
+      $('.tab-pane1').css('display', 'block');
+      $('.tab-pane2').css('display', 'none');
+    });
+  });
+</script>
+
+<style type="text/css">
+  .tab-pane2 {
+    display: none;
+  }
+
+  a.btn.btn-primary.btnNext.compI_next {
+    float: right;
+  }
+
+  .signup-actions {
+    margin-top: 13px;
+  }
+
+  a.btn.btn-primary.btnPrevious {
+    float: right;
+  }
+
+  input.btn.btn-primary.form-submit {
+    float: right;
+    margin-left: 20px;
+    width: 20%;
+  }
+</style>

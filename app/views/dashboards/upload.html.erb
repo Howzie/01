@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row">
+        <h2>Searched Inventories</h2>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Item Code</th>
+                        <th>Item Name</th>
+                        <th>Item Specification</th>
+                        <th>Item Price</th>
+                        <th>Item Delivery Date</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% @search_items.each do |h| %>
+                        <% h.each do |s| %>
+                            <tr>
+                                <td><%= s.code %></td>
+                                <td><%= s.name %></td>
+                                <td><%= s.specification %></td>
+                                <td><%= s.price %></td>
+                                <td><%= s.delivery_days %></td>
+                            </tr>
+                        <% end %>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+  </div>
+  <%#= link_to 'New Account', new_account_path, class:"btn btn-primary" %>
+</div>

@@ -1,0 +1,89 @@
+<div class="container">
+    <div class="row">
+        <h2 class="main-heading">Searched Inventories</h2>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Item Code</th>
+                        <th>Item Name</th>
+                        <th>Item Specification</th>
+                        <th>Item Price</th>
+                        <th>Item Delivery Days</th>
+                        <th>Qty</th>
+                        <th>Item Delivery Date</th>
+                        <th>Make Order</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                        <% i = 0 %>
+                        <% @short_items.each do |h| %>
+                        <% h.each do |s| %>
+                            <tr id="element" class="item_<%= s.id %>">
+                                <td><%= s.code %></td>
+                                <td><%= s.name %></td>
+                                <td><%= s.specification %></td>
+                                <td><%= s.price %></td>
+                                <td><%= s.delivery_days %></td>
+                                <td><%= @qty[i] %></td>
+                                <td><%= @start_date + s.delivery_days %></td>
+                                <td>
+                                    <label><input type="radio" class="user_item" id="item_<%= s.id %>" name="<%= s.code %>" data-id="<%= s.id %>-<%= @qty[i]%>" data-val="<%= @qty[i] %>"></label>
+                                </td>
+                            </tr>
+                        <% end %>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr></tr>
+                        <% i += 1 %>
+                    <% end %>
+                </tbody>
+                <div id="result"></div>
+            </table>
+        </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 nxt-btn">
+        <%= link_to "Next", show_order_orders_path, class: 'btn btn-primary'%>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        // $(".user_item").click(function(){
+        //     $('.user_item').removeClass("checked");
+        //     $(this).addClass("active");
+        // });
+        $(".user_item").click(function(){
+            var dclass = $(this).closest('tr').next('tr').attr("class");
+            var pclass = $(this).closest('tr').prev('tr').attr("class");
+            var ddclass = $(this).closest('tr').next('tr').next('tr').attr("class");
+            var ppclass = $(this).closest('tr').prev('tr').prev('tr').attr("class");
+            $('.'+ dclass).css('background-color', 'white');
+            $('.'+ pclass).css('background-color', 'white');
+            $('.'+ ddclass).css('background-color', 'white');
+            $('.'+ ppclass).css('background-color', 'white');
+            var a = $(this).attr("id");
+            $('.'+ a).css('background-color', 'azure');
+            var item_id = $(this).attr("data-id");
+            $.ajax({
+                type: "get",
+                url: '/orders/' + item_id + '/user_order',
+                success:function(data) {
+                    // alert(data);
+                }
+            });
+        });
+    });
+</script>

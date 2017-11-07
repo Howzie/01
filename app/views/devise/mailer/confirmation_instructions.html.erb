@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+	<head>
+	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	    <style type="text/css" media="screen">
+	    	.confirm-btn{
+	    		color: #fff;
+			    background-color: #428bca;
+			    border-color: #357ebd;
+			    border-radius: 34px;
+			    width: 20%;
+			    line-height: 2rem;
+			    height: 20%;
+			    padding: 20px 65px;
+			    font-weight: bold;
+			    text-decoration: none;
+			    font-size: 20px;
+	    	}
+	    	.main{
+	    		background-color: #f2f2f2;
+			    border: 1px solid #d9d9d9;
+			    padding: 0px 20px;
+	    	}
+	    	.btn{
+	    		padding: 40px;
+	    	}
+	    	p{
+	    		color: #000;
+	    	}
+	    </style>
+	</head>
+	<body>
+		<div class="main">
+		    <p class="intro">Welcome <%= @email %>,</p>
+		    <p>Thanks for using Example! Please confirm your email address by clicking on the link below.</p>
+		    <p>We may need to communicate with you via email about important service level issues so it's important that we have an up-to-date email address on file.</p>
+		    <div class="btn">
+		    	<%= link_to 'Confirm My Account', confirmation_url(@resource, confirmation_token: @token), class: "confirm-btn" %>
+		    </div>
+		    <p>Happy emailing!</p>
+	  	</div>
+	</body>
+</html>

@@ -1,0 +1,111 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-8 col-lg-offset-2 main-class">
+			<h3 class="heading">Done!</h3>
+			<div class="row main">
+				<div class="col-lg-6">
+					<h4>Order Number:- <span><%= rand.to_s[2..11] %></span></h4>
+				</div>
+				<div class="col-lg-6">
+					<h4>Date:- <span><%= Date.today %></span></h4>
+				</div>
+			</div>
+			<div class="row main">
+				<div class="col-lg-12">
+					<div class="table-responsive">
+			            <table class="table table-hover receipt">
+			                <thead>
+			                    <tr>
+			                        <th>Item Code</th>
+			                        <th>Item Name</th>
+			                        <th>Item Qty</th>
+			                        <th>Item Price</th>
+			                        <th>Delivery Date</th>
+			                        <th>Total</th>
+			                    </tr>
+			                </thead>
+
+			                <tbody>
+			                	<% @total = [] %>
+	                            <% @my_orders.each do |h| %>
+		                            <tr>
+		                                <td><%= h.item.code %></td>
+		                                <td><%= h.item.name %></td>
+		                                <td><%= h.item_qty %></td>
+		                                <td> $ <%= h.item.price %></td>
+		                                <td><%= h.delivery_date %></td>
+		                                <td> $ <%= h.item_qty * h.item.price %></td>
+		                                <% @total << h.item_qty * h.item.price  %>
+		                            </tr>
+		                    	<% end %>
+			                </tbody>
+			            </table>
+	        		</div>
+				</div>
+			</div>
+			<div class="row main">
+				<div class="col-lg-12">
+					<div class="table-responsive">
+						<% @final_total = @total.inject(0){|sum,x| sum + x } %>
+						<table class="table-class">
+							<tr class="spaceUnder">
+								<td>Total</td>
+								<td></td>
+								<td></td>
+								<td>$ <%= @final_total %></td>
+							</tr>
+							<tr>
+								<td>+ GST</td>
+								<td></td>
+								<td></td>
+								<td> 12% </td>
+							</tr>
+						</table>
+					</div>	
+				</div>
+			</div>
+			<div class="row main">
+				<div class="col-lg-12">
+					<div class="table-responsive">
+						<table class="table-class">
+							<tr class="spaceUnder">
+								<td>Paid amount</td>
+								<td></td>
+								<td></td>
+								<% @a = @final_total / 100 %>
+								<% @b = (12 * @a.to_f) %>
+								<td>$ <%= @final_total + @b %></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="row main">
+				<div class="col-lg-3">
+					<h4>Delivery date:-</h4>
+				</div>
+				<div class="col-lg-9">
+					<h4 class="date">11/11/2017</h4>
+				</div>
+			</div> -->
+			<div class="row main">
+				<div class="col-lg-3">
+					<h4>Delivery address:-</h4>
+				</div>
+				<div class="col-lg-9">
+					<h4 class="date"><%= @my_orders.first.delivery_add %></h4>
+				</div>
+			</div>
+			<div class="row main">
+				<div class="col-lg-6">
+					<button type="button" class="btn btn-success">Print</button>
+				</div>
+				<div class="col-lg-6">
+					<%= link_to "  Log out", destroy_user_session_path, :method => :delete, class:"btn btn-danger" %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+

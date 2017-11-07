@@ -1,0 +1,57 @@
+<div class="container">
+	<div class="row">
+		<div class="col-lg-9">
+			<div class="user-orders">
+				<h2 class="main-heading">Yours Inventory list!</h2>
+				<div class="col-xs-9 col-lg-9 col-sm-9 col-md-9">
+					<div class="merch-item">
+						<div class="table-responsive">
+				            <table class="table table-hover">
+				                <thead>
+				                    <tr>
+				                        <th>Item Code</th>
+				                        <th>Item Name</th>
+				                        <th>Item Specification</th>
+				                        <th>Item Price</th>
+				                        <th>Item Stock</th>
+				                        <th>Item Delivery Days</th>
+				                    </tr>
+				                </thead>
+
+				                <tbody>
+				                    <% @merchant_items.each do |h| %>
+			                            <tr>
+			                                <td><%= h.code %></td>
+			                                <td><%= h.name %></td>
+			                                <td><%= h.specification %></td>
+			                                <td><%= h.price %></td>
+			                                <td><%= h.stock %></td>
+			                                <td><%= h.delivery_days %></td>
+			                            </tr>
+				                    <% end %>
+				                </tbody>
+				            </table>
+				        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3 new-orders">
+			<div class="upld-inventory">
+				<h4>Upload your inventory</h4>
+				<%= form_tag  import_dashboards_path, multipart: true, onsubmit: "return Validate(this);" do %>
+					<%= file_field_tag :file, :required => true %></br>
+					<%= submit_tag "Upload Inventory", class: "btn btn-primary" %>
+				<% end %>
+			</div>
+			<div class="order-list">
+				<h4>My Order</h4>
+				<%= link_to "Your Orders", my_orders_orders_path, class:"btn btn-primary" %>
+			</div>
+			<div class="order-list">
+				<h4>Edit profile</h4>
+				<%= link_to 'Edit Profile', edit_user_registration_path, class: 'btn btn-primary' %>
+			</div>
+		</div>
+	</div>
+</div>

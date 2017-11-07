@@ -1,0 +1,42 @@
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="user-orders">
+				<h2 class="main-heading">My Orders</h2>
+				<% if @my_orders.blank? %>
+					<p class="no-slug">You have no orders.</p>
+				<% else %>
+					<div class="table-responsive">
+			            <table class="table table-hover">
+			                <thead>
+			                    <tr>
+			                        <th>Item Code</th>
+			                        <th>Item Name</th>
+			                        <th>Item Specification</th>
+			                        <th>Item Price</th>
+			                        <th>Qty</th>
+			                        <th>Item Delivery Date</th>
+			                        <th>Item address</th>
+			                    </tr>
+			                </thead>
+
+			                <tbody>
+		                        <% @my_orders.each do |s| %>
+		                            <tr id="element">
+		                                <td><%= s.item.code %></td>
+		                                <td><%= s.item.name %></td>
+		                                <td><%= s.item.specification %></td>
+		                                <td><%= s.item.price %></td>
+		                                <td><%= s.item_qty %></td>
+		                                <td><%= s.delivery_date %></td>
+		                                <td><%= s.delivery_add %></td>
+		                            </tr>
+			                    <% end %>
+			                </tbody>
+			            </table>
+			        </div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
