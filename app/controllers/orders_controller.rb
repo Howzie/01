@@ -4,6 +4,13 @@ class OrdersController < ApplicationController
 
 	def index
 		# @merchant_items = Item.where("user_id =?", current_user.id)
+		@sample_csv = ["code", "item", "qty"]
+	    respond_to do |format|
+	      format.html
+	      format.csv { send_data @sample_csv.to_csv}
+	      ##we can also change the downloaded CSV file name by setting filename attribute of send_data method
+	      #format.csv { send_data @employees.to_csv, :filename => '<file_name>.csv' }
+	    end
 	end
 
 	def home
@@ -90,7 +97,7 @@ class OrdersController < ApplicationController
 				delivery_date =  Date.today + item.delivery_days
 				order = Order.create!(user_id: current_user.id, merchant_id: item.user_id, item_id: item.id, item_qty: id[2], delivery_add: session[:delivery_add], postal_code: session[:postal_code], delivery_date: delivery_date, is_confirm: params[:is_confirm]  )
 
-				# @stock = item.update_attributes(stock: item.stock.to_i - id[2].to_i)
+				@stock = item.update_attributes(stock: item.stock.to_i - id[2].to_i)
 
 			end
 			session.delete(:items_id)

@@ -1,4 +1,7 @@
-Rails.application.routes.draw do
+  Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+  # devise_for :admins
   # devise_for :users
    devise_for :users, :controllers => { :registrations => "users/registrations" }
   # devise_for :users, controllers: {
@@ -17,6 +20,17 @@ Rails.application.routes.draw do
   # resources :dashboards do
   #   post :upload, :on => :collection
   #   post :import, :on => :collection
+  # end
+  # namespace :admin do
+  #   devise_scope :admin do
+  #     authenticated :admin do
+  #       root 'admin_dashboards#index', as: :authenticated_root
+  #     end
+
+  #     unauthenticated do
+  #       root 'admin_dashboards#home', as: :unauthenticated_root
+  #     end
+  #   end
   # end
 
   devise_scope :user do
@@ -100,6 +114,5 @@ Rails.application.routes.draw do
   # namespace :admin do
   # # Directs /admin/products/* to Admin::ProductsController
   # # (app/controllers/admin/products_controller.rb)
-  #   resources :products
   # end
 end

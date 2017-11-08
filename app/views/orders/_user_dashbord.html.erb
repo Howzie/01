@@ -32,6 +32,9 @@
 					<div class="search-btn">
 						<%= submit_tag "Search Inventory", class: "btn btn-primary pull-left" %>
 					</div>
+					<div class="sample-csv">
+						<%= link_to "Download Sample CSV", orders_path(format: "csv"), class: "btn btn-primary smpl-csv" %>
+					</div>
 				</div>
 			<% end %>
 		</div>
